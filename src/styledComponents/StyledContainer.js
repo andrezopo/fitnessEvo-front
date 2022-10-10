@@ -10,6 +10,12 @@ const StyledContainer = styled.div`
   padding-top: ${(props) => (props.signIn ? "65px" : "0")};
   min-height: 100vh;
 
+  h1 {
+    font-family: "Oswald", sans-serif;
+    margin-bottom: 10px;
+    font-size: 43px;
+  }
+
   img {
     width: 150px;
     height: auto;

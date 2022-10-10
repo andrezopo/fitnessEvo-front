@@ -43,8 +43,9 @@ function SignInScreen() {
   }
 
   return (
-    <StyledContainer disabled={disable} signIn="true">
+    <StyledContainer disabled={disable}>
       <img src={fitnessEvo} alt="fitnessEvo logo" />
+      <h1>Fitness Evo</h1>
       <form onSubmit={signIn}>
         <input
           disabled={disable}
