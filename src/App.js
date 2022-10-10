@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignInScreen from "./components/SignInScreen";
 import SignUpScreen from "./components/SignUpScreen";
+import UserAddtionalInfos from "./components/UserAdditionalInfos";
 import UserContext from "./contexts/UserContext";
 
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<SignInScreen />} />
           <Route path="/sign-up" element={<SignUpScreen />} />
+          <Route path="/user" element={<UserAddtionalInfos />} />
         </Routes>
       </UserContext.Provider>
     </BrowserRouter>
