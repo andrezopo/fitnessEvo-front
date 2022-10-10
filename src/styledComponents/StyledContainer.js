@@ -33,6 +33,23 @@ const StyledContainer = styled.div`
     }
   }
 
+  select {
+    width: 326px;
+    height: 50px;
+    margin-bottom: 13px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 400;
+    ::placeholder {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 23px;
+      color: #000000;
+    }
+  }
+
   a {
     font-size: 15px;
     font-weight: 700;
