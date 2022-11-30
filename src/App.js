@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SignInScreen from "./components/SignInScreen";
-import SignUpScreen from "./components/SignUpScreen";
-import UserAddtionalInfos from "./components/UserAdditionalInfos";
+import SignInScreen from "./pages/SignInScreen";
+import SignUpScreen from "./pages/SignUpScreen";
+import UserAddtionalInfos from "./pages/UserAdditionalInfos";
 import UserContext from "./contexts/UserContext";
 
 export default function App() {
