@@ -11,9 +11,9 @@ export default function UserAddtionalInfos() {
   const { name, email, setEmail, token } = useContext(UserContext);
   const [disable, setDisable] = useState(false);
   const [sex, setSex] = useState("");
-  const [age, setAge] = useState(null);
-  const [weight, setWeight] = useState(null);
-  const [height, setHeight] = useState(null);
+  const [age, setAge] = useState("");
+  const [weight, setWeight] = useState("");
+  const [height, setHeight] = useState("");
   const [activityLevel, setActivityLevel] = useState("");
   const [trainingExperience, setTrainingExperience] = useState("");
   const [objective, setObjective] = useState("");
