@@ -66,7 +66,7 @@ export default function UserAddtionalInfos() {
       userAdditionalInfos = {
         sex,
         age,
-        weight,
+        weight: weight * 10,
         height,
         activityLevel,
         trainingExperience,
@@ -143,7 +143,7 @@ export default function UserAddtionalInfos() {
                   id="weight"
                   type="number"
                   placeholder=""
-                  onChange={(e) => setWeight(Number(e.target.value * 10))}
+                  onChange={(e) => setWeight(Number(e.target.value))}
                   value={weight}
                   required
                 />
