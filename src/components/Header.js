@@ -42,11 +42,19 @@ const StyledDiv = styled.div`
     width: 40px;
     height: 40px;
     margin: 0;
+
+    :hover {
+      cursor: pointer;
+    }
   }
 
   p {
     font-size: 18px;
     font-weight: 400;
+
+    :hover {
+      cursor: pointer;
+    }
   }
 
   div {

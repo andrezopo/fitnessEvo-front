@@ -199,8 +199,8 @@ export default function UserAddtionalInfos() {
           </AdditionalInfoDiv>
           <InfoDiv>
             <h3>
-              Preencha os dados ao lado para que possamos fazer os cálculos de
-              seus macronutrientes diários. <br />
+              Preencha os dados para que possamos fazer os cálculos de seus
+              macronutrientes diários. <br />
               Seu gasto calórico diário varia de acordo com seu peso e seu nível
               de atividade:
               <br />
@@ -241,6 +241,10 @@ const AdditionalInfoDiv = styled.div`
   align-items: flex-start;
   width: 35%;
   height: 90%;
+
+  @media (max-width: 800px) {
+    width: 90%;
+  }
 `;
 
 const InfoDiv = styled.div`
@@ -253,7 +257,7 @@ const InfoDiv = styled.div`
   margin-top: 20px;
 
   h3 {
-    justify-self: flex-start;
+    justify-self: center;
     font-size: 18px;
     line-height: 29px;
     font-weight: 600;
@@ -267,6 +271,17 @@ const InfoDiv = styled.div`
     font-weight: 400;
     li {
       margin-top: 5px;
+    }
+  }
+
+  @media (max-width: 800px) {
+    width: 90%;
+    height: 100%;
+    /* margin-top: ; */
+    margin-bottom: 10px;
+
+    h3 {
+      justify-self: flex-end;
     }
   }
 `;
@@ -286,6 +301,13 @@ const AdditionalInfoContainer = styled.div`
   form {
     display: flex;
     align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: 80vh;
+
+    div {
+      width: 80%;
+    }
   }
 
   input {
@@ -306,5 +328,18 @@ const AdditionalInfoContainer = styled.div`
     width: 100%;
     font-size: 14px;
     color: #894a4a;
+  }
+
+  @media (max-width: 800px) {
+    flex-direction: column-reverse;
+    height: 100%;
+
+    form {
+      height: 100%;
+
+      div {
+        width: 100%;
+      }
+    }
   }
 `;

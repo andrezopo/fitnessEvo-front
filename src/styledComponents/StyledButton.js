@@ -14,6 +14,10 @@ const StyledButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export default StyledButton;
