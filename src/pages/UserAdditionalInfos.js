@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import UserContext from "../contexts/UserContext";
-import Header from "./Header";
+import Header from "../components/Header";
 import styled from "styled-components";
 import StyledContainer from "../styledComponents/StyledContainer";
 import StyledButton from "../styledComponents/StyledButton";
@@ -54,7 +54,7 @@ export default function UserAddtionalInfos() {
     };
     try {
       await axios.post(
-        "http://localhost:5000/users/infos",
+        `${process.env.REACT_APP_BACKEND_URL}/users/infos`,
         userAdditionalInfos,
         config
       );

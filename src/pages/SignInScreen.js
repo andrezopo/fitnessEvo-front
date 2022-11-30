@@ -1,29 +1,43 @@
-import StyledButton from "../styledComponents/StyledButton";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import StyledContainer from "../styledComponents/StyledContainer";
-import fitnessEvo from "../assets/images/fitnessEvo.png";
 import axios from "axios";
 import UserContext from "../contexts/UserContext";
+import StyledContainer from "../styledComponents/StyledContainer";
+import fitnessEvo from "../assets/images/fitnessEvo.png";
+import StyledButton from "../styledComponents/StyledButton";
 
-function SignUpScreen() {
-  const [disable, setDisable] = useState(false);
-  const { email, setEmail, password, setPassword, name, setName } =
-    useContext(UserContext);
+function SignInScreen() {
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    setToken,
+    setUserId,
+    setName,
+  } = useContext(UserContext);
   const navigate = useNavigate();
+  const [disable, setDisable] = useState(false);
 
-  function register(e) {
+  function signIn(e) {
     e.preventDefault();
     const body = {
       email,
       password,
-      name,
     };
-    const promise = axios.post("http://localhost:5000/sign-up", body);
+    const promise = axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}/sign-in`,
+      body
+    );
     setDisable(true);
-    promise.then(() => {
+    promise.then((res) => {
+      const response = res.data;
+      setUserId(response.id);
+      setToken(response.token);
+      setName(response.name);
       setDisable(false);
-      navigate("/", { replace: true });
+
+      navigate("/user", { replace: true });
     });
     promise.catch((err) => {
       alert(err.response.data);
@@ -34,21 +48,13 @@ function SignUpScreen() {
   return (
     <StyledContainer disabled={disable}>
       <img src={fitnessEvo} alt="fitnessEvo logo" />
-      <form onSubmit={register}>
-        <input
-          disabled={disable}
-          id="name"
-          type="text"
-          placeholder="Nome"
-          onChange={(e) => setName(e.target.value)}
-          value={name}
-          required
-        />
+      <h1>Fitness Evo</h1>
+      <form onSubmit={signIn}>
         <input
           disabled={disable}
           id="email"
           type="text"
-          placeholder="E-mail"
+          placeholder="email"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
           required
@@ -57,18 +63,18 @@ function SignUpScreen() {
           disabled={disable}
           id="password"
           type="password"
-          placeholder="Senha"
+          placeholder="senha"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
           required
         />
         <StyledButton disabled={disable} height={46} width={326} fontSize={20}>
-          Cadastrar
+          Entrar
         </StyledButton>
       </form>
-      <Link to="/">Já tem uma conta? Entre agora!</Link>
+      <Link to="/sign-up">Primeira vez? Cadastre-se!</Link>
     </StyledContainer>
   );
 }
 
-export default SignUpScreen;
+export default SignInScreen;
