@@ -9,6 +9,7 @@ function Header({ text, signOutButton }) {
   const navigate = useNavigate();
 
   function signOut() {
+    localStorage.removeItem("user");
     navigate("/", { replace: true });
   }
   return (

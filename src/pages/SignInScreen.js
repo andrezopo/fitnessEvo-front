@@ -33,10 +33,16 @@ function SignInScreen() {
     setDisable(true);
     promise.then((res) => {
       const response = res.data;
+
+      const user = {
+        token: response.token,
+        name: response.name,
+      };
       setUserId(response.id);
       setToken(response.token);
       setName(response.name);
       setDisable(false);
+      localStorage.setItem("user", JSON.stringify(user));
       toast.success("Bem-vindo, monstro!");
 
       navigate("/user", { replace: true });

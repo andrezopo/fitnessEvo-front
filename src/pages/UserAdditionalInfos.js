@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import UserContext from "../contexts/UserContext";
 import Header from "../components/Header";
 import styled from "styled-components";
@@ -6,9 +6,10 @@ import StyledContainer from "../styledComponents/StyledContainer";
 import StyledButton from "../styledComponents/StyledButton";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function UserAddtionalInfos() {
-  const { name, email, setEmail, token } = useContext(UserContext);
+  const { name, setName, setToken, token } = useContext(UserContext);
   const [disable, setDisable] = useState(false);
   const [sex, setSex] = useState("");
   const [age, setAge] = useState("");
@@ -20,6 +21,33 @@ export default function UserAddtionalInfos() {
   const [bodyFat, setBodyFat] = useState("");
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+      navigate("/", { replace: true });
+    }
+
+    setName(user.name);
+    setToken(user.token);
+
+    async function checkUserInfos() {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data: userInfos } = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/users/infos`,
+        config
+      );
+      if (userInfos.calorieGoal) {
+        navigate("/today", { replace: true });
+      }
+    }
+
+    checkUserInfos();
+  }, []);
 
   async function addUserInfos(e) {
     e.preventDefault();
@@ -58,9 +86,16 @@ export default function UserAddtionalInfos() {
         userAdditionalInfos,
         config
       );
+      toast.success("Bora ficar gigante!");
+
       navigate("/today", { replace: true });
     } catch (err) {
-      alert(err.message);
+      if (err.response.status !== 500) {
+        console.log(err);
+        toast.info(err.response.data);
+      } else {
+        toast.error("Ops, ocorreu um problema!");
+      }
     }
   }
   return (
@@ -108,7 +143,7 @@ export default function UserAddtionalInfos() {
                   id="weight"
                   type="number"
                   placeholder=""
-                  onChange={(e) => setWeight(Number(e.target.value))}
+                  onChange={(e) => setWeight(Number(e.target.value * 10))}
                   value={weight}
                   required
                 />
