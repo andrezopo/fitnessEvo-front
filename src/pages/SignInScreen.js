@@ -5,6 +5,7 @@ import UserContext from "../contexts/UserContext";
 import StyledContainer from "../styledComponents/StyledContainer";
 import fitnessEvo from "../assets/images/fitnessEvo.png";
 import StyledButton from "../styledComponents/StyledButton";
+import { toast } from "react-toastify";
 
 function SignInScreen() {
   const {
@@ -36,11 +37,17 @@ function SignInScreen() {
       setToken(response.token);
       setName(response.name);
       setDisable(false);
+      toast.success("Bem-vindo, monstro!");
 
       navigate("/user", { replace: true });
     });
     promise.catch((err) => {
-      alert(err.response.data);
+      if (err.response.status !== 500) {
+        toast.info("Usuário e/ou senha incorretos!");
+      } else {
+        toast.error("Ops, ocorreu um problema!");
+      }
+
       setDisable(false);
     });
   }

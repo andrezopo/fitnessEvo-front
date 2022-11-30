@@ -4,6 +4,8 @@ import SignInScreen from "./pages/SignInScreen";
 import SignUpScreen from "./pages/SignUpScreen";
 import UserAddtionalInfos from "./pages/UserAdditionalInfos";
 import UserContext from "./contexts/UserContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
   const [email, setEmail] = useState("");
@@ -13,6 +15,7 @@ export default function App() {
   const [userId, setUserId] = useState("");
   return (
     <BrowserRouter>
+      <ToastContainer theme="colored" autoClose={2000} />
       <UserContext.Provider
         value={{
           email,

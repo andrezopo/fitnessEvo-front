@@ -5,6 +5,7 @@ import StyledContainer from "../styledComponents/StyledContainer";
 import fitnessEvo from "../assets/images/fitnessEvo.png";
 import axios from "axios";
 import UserContext from "../contexts/UserContext";
+import { toast } from "react-toastify";
 
 function SignUpScreen() {
   const [disable, setDisable] = useState(false);
@@ -26,10 +27,16 @@ function SignUpScreen() {
     setDisable(true);
     promise.then(() => {
       setDisable(false);
+      toast.success("Cadastrado com sucesso!");
+
       navigate("/", { replace: true });
     });
     promise.catch((err) => {
-      alert(err.response.data);
+      if (err.response.status !== 500) {
+        toast.info("Não foi possível fazer o cadastro!");
+      } else {
+        toast.error("Ops, ocorreu um problema!");
+      }
       setDisable(false);
     });
   }
