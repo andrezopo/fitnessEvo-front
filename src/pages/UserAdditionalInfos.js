@@ -51,10 +51,11 @@ export default function UserAddtionalInfos() {
     }
 
     checkUserInfos();
-  }, []);
+  });
 
   async function addUserInfos(e) {
     e.preventDefault();
+    setDisable(true);
     let userAdditionalInfos = {};
     if (!bodyFat) {
       userAdditionalInfos = {
@@ -91,14 +92,17 @@ export default function UserAddtionalInfos() {
         config
       );
       toast.success("Bora ficar gigante!");
+      setDisable(false);
 
       navigate("/today", { replace: true });
     } catch (err) {
       if (err.response.status !== 500) {
         console.log(err);
         toast.info(err.response.data);
+        setDisable(false);
       } else {
         toast.error("Ops, ocorreu um problema!");
+        setDisable(false);
       }
     }
   }
